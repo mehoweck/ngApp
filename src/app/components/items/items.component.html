@@ -1,0 +1,23 @@
+<!-- .row>.col-3+.col-9 -->
+<div class="row">
+  <div class="col-3">
+    <app-search [filters]="filters" [controls]="['title', 'priceFrom']"></app-search>
+  </div>
+  <div class="col-9">
+    <div class="row">
+      <div class="col-2"><app-add-item [newItem]="newItem"></app-add-item></div>
+      <div class="col-2">
+        <select class="form-control" [value]="filters.value.itemsPerPage" 
+              (change)="updateFilters('itemsPerPage', $event.target.value)">
+          <option *ngFor="let opt of [1,2,5,10,20]">
+            {{opt}}
+          </option>
+        </select>
+      </div>
+      <div class="col-8">
+        <ngb-pagination [collectionSize]="itemsCount" [pageSize]="filters.value.itemsPerPage" (pageChange)="updateFilters('currentPage', $event)"></ngb-pagination>
+      </div>
+    </div>
+    <app-datagrid [data]="itemsData" [config]="itemsConfig" (removeEvent)="onRemoveItem($event)"></app-datagrid>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<!-- form>div.form-group>input+small.badge.badge-danger -->
+{{ form.value | json }}
+<form [formGroup]="form">
+  <div class="form-group">
+    <input type="text" formControlName="username">
+    <small class="badge badge-danger">
+      {{ form.get('username').errors | json }}
+    </small>
+  </div>
+
+  <div class="form-group">
+    <input type="text" formControlName="password">
+    <small class="badge badge-danger" *ngIf="form.get('password').errors">
+      password must contain 4-8 characters
+      <!-- {{ form.get('password').errors | json }} -->
+    </small>
+  </div>
+
+  <div class="form-group">
+    <input type="date" formControlName="birthDate">
+    <small class="badge badge-danger">
+      {{ form.get('birthDate').errors | json }}
+    </small>
+  </div>
+
+  <div class="form-group" formGroupName="hobbies">
+
+    <div *ngFor="let item of form.get('hobbies').value | mapToIterable" class="checkbox checkbox-primary">
+      <input [id]="item" type="checkbox" [formControlName]="item">
+      <label [for]="item">{{ item }}</label>
+    </div>
+
+    <small class="badge badge-warning">
+      {{ form.get('hobbies').value | json }}
+    </small>
+
+  </div>
+  
+</form>

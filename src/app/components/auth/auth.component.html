@@ -1,0 +1,9 @@
+{{ loginForm.value | json }}
+
+<form class="form-inline" #loginForm="ngForm">
+  <input class="form-control form-control-sm" ngModel="admin@localhost" required type="email" name="username" placeholder="username">
+  <input class="form-control form-control-sm" ngModel="admin" required type="password" name="password" placeholder="password">
+  <button class="btn btn-sm btn-primary" (click)="logIn(loginForm)" [disabled]="!loginForm">
+    log in
+  </button>
+</form>

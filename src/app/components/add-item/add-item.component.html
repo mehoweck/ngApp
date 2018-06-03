@@ -1,0 +1,26 @@
+<ng-template #content>
+  {{ addItemForm.value | json }}
+  <form id="add-item-form" class="modal-body" #addItemForm="ngForm">
+    <div class="form-group">
+      <input required class="form-control" type="text" ngModel placeholder="title" name="Title">
+      <small>{{ addItemForm.controls.title?.errors | json }}</small>
+    </div>
+    <div class="form-group">
+      <input required class="form-control" type="number" ngModel placeholder="price" name="price">
+      <small>{{ addItemForm.controls.price?.errors | json }}</small>
+    </div>
+    <div class="form-group">
+      <select required name="category" ngModel class="form-control">
+        <option value="" disabled selected>category</option>
+        <option value="food">food</option>
+        <option value="clothes">clothes</option>
+      </select>
+      <small>{{ addItemForm.controls.category?.errors | json }}</small>
+    </div>
+    <hr>
+    <button type="button" class="btn btn-secondary" (click)="sendForm(addItemForm)">
+      send item
+    </button>
+  </form>
+</ng-template>
+<button class="btn btn-primary" (click)="open(content)">add item</button>

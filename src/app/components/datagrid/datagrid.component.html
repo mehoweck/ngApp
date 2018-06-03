@@ -1,0 +1,30 @@
+<!-- table.table>thead+tbody> -->
+<table class="table">
+  <thead>
+    <tr>
+      <th *ngFor="let obj of config">{{ obj.key | uppercase }}</th>
+      <th>ACTIONS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of data">
+      <td *ngFor="let obj of config">
+        <div [ngSwitch]="obj.type">
+          <div *ngSwitchCase="'image'">
+            <img [src]="row[obj.key]" width="50">
+          </div>
+          <div *ngSwitchCase="'italic'">
+            <i>{{ row[obj.key] }}</i>
+          </div>
+          <div *ngSwitchCase="'input'">
+            <input class="form-control" type="text" [value]="row[obj.key]">
+          </div>
+          <div *ngSwitchDefault>{{ row[obj.key] }}</div>
+        </div>
+      </td>
+      <td>
+        <button id="removebtn" class="btn btn-danger" (click)="remove(row.id)">remove</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
